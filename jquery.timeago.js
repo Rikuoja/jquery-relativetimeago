@@ -4,7 +4,7 @@
  * Relative Timeago formats future times in calendar terms.
  *
  * @name relative-timeago
- * @version 1.4.3
+ * @version 1.5
  * @requires jQuery v1.2.3+ and Moment.js v2.0.0+
  * @author Ryan McGeary
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php

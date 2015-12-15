@@ -1,8 +1,11 @@
-# timeago: a jQuery plugin
+# relativetimeago: a jQuery plugin
 
 Timeago is a jQuery plugin that makes it easy to support automatically updating
 fuzzy timestamps (e.g. "4 minutes ago" or "about 1 day ago") from ISO 8601
 formatted dates and times embedded in your HTML (à la microformats).
+RelativeTimeago fork allows displaying future times in calendar terms
+(e.g. "Today at 18:00", "Next sunday at 18:00", "Sunday December 29 at 18:00")
+while not affecting the display of past times.
 
 ---
 
@@ -23,10 +26,11 @@ Bitcoin: `1rmm5tv6f997JK5bLcGbRCZyVjZUPkQ2m`
 
 ## Usage
 
-First, load jQuery and the plugin:
+First, load jQuery, Moment.js and the plugin:
 
 ```html
 <script src="jquery.min.js" type="text/javascript"></script>
+<script src="moment.min.js" type="text/javascript"></script>
 <script src="jquery.timeago.js" type="text/javascript"></script>
 ```
 
@@ -63,6 +67,20 @@ HTML5 `<time>` elements are also supported:
 
 As time passes, the timestamps will automatically update.
 
+To enable calendar formatting of future dates, use
+
+```html
+<script type="text/javascript">
+   $t.settings.relativeTime = True;
+   jQuery(document).ready(function() {
+     $("abbr.timeago").timeago();
+   });
+</script>
+```
+
+The setting will not affect the formatting of past dates.
+
+
 **For more usage and examples**: [http://timeago.yarp.com/](http://timeago.yarp.com/)
 
 **For different language configurations**: visit the [`locales`](https://github.com/rmm5t/jquery-timeago/tree/master/locales) directory.
@@ -71,6 +89,7 @@ As time passes, the timestamps will automatically update.
 
 | Version | Notes                                                                           |
 |---------|---------------------------------------------------------------------------------|
+|   1.5.x | ([compare][compare-1.5]) Forked; added relativeTime setting                     |
 |   1.4.x | ([compare][compare-1.4]) Added allowPast setting                                |
 |   1.3.x | ([compare][compare-1.3]) Added updateFromDOM function; bug fixes; bower support |
 |   1.2.x | ([compare][compare-1.2]) Added cutoff setting                                   |
@@ -83,6 +102,7 @@ As time passes, the timestamps will automatically update.
 |   0.7.x | ([compare][compare-0.7]) locale function overrides; unit tests                  |
 |     ... | ...                                                                             |
 
+[compare-1.5]: https://github.com/rikuoja/jquery-relativetimeago/compare/v1.4.3...v1.5.0
 [compare-1.4]: https://github.com/rmm5t/jquery-timeago/compare/v1.3.2...v1.4.3
 [compare-1.3]: https://github.com/rmm5t/jquery-timeago/compare/v1.2.0...v1.3.2
 [compare-1.2]: https://github.com/rmm5t/jquery-timeago/compare/v1.1.0...v1.2.0
