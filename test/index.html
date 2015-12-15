@@ -207,6 +207,20 @@
       <li><abbr id="testAllowPastAndFutureFalse" title="2008-01-01T09:24:17Z"></abbr></li>
     </ul>
 
+    <h2>RelativeTimeago</h2>
+    <ul>
+      <li>Jett was born
+      <abbr id="testRelativeTimePast" class="relativeTime" title="90000"> [25 hours]</abbr></li>
+      <li>Jett will be born
+      <abbr id="testRelativeTimeTodayFuture" class="relativeTime" title="0"> [0 sec]</abbr></li>
+      <li>Jett will be born
+      <abbr id="testRelativeTimeTomorrowFuture" class="relativeTime" title="-86400"> [-24 hours]</abbr></li>
+      <li>Jett will be born
+      <abbr id="testRelativeTimeInFiveDaysFuture" class="relativeTime" title="-432000"> [-5 days]</abbr></li>
+      <li>Jett will be born
+      <abbr id="testRelativeTimeInTenDaysFuture" class="relativeTime" title="-864000"> [-10 days]</abbr></li>
+    </ul>
+
     <h2>Disposal</h2>
     <p><abbr class="disposal disposed"></abbr></p>
     <p><abbr class="disposal notDisposed"></abbr></p>
@@ -214,6 +228,7 @@
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
   <script src="../jquery.timeago.js"></script>
   <script src="test_helpers.js" type="text/javascript"></script>
   <script type="text/javascript">
@@ -232,7 +247,7 @@
       }
 
       function toWords() {
-        var string = $.timeago.inWords(parseInt(this.title, 10) * 1000);
+        var string = $.timeago(Date.now()-parseInt(this.title, 10) * 1000);
         $(this).text(string);
       }
 
@@ -267,6 +282,10 @@
       loadDoNotAllowPast();
       $("abbr.doNotAllowPast").timeago();
       unloadDoNotAllowPast();
+
+      loadRelativeTime();
+      $("abbr.relativeTime").each(toWords);
+      unloadRelativeTime();
 
       setupDisposal();
 
@@ -566,13 +585,13 @@
       test("seconds", function () {
         ok($("#testLatinSettings5").html().match(/^ess-lay an-thay a-hay inute-may/), "Settings correctly applied");
         ok($("#testRussianSettings5").html().match(/^меньше минуты/), "Settings correctly applied");
-        ok($("#testMillisSettings5").html().match(/0 milliseconds/), "Settings correctly applied");
+        ok($("#testMillisSettings5").html().match(/milliseconds ago/), "Settings correctly applied");
       });
 
       test("minute", function () {
         ok($("#testLatinSettings7").html().match(/^about-hay a-hay inute-may/), "Settings correctly applied");
         ok($("#testRussianSettings7").html().match(/^минуту/), "Settings correctly applied");
-        ok($("#testMillisSettings7").html().match(/45000 milliseconds/), "Settings correctly applied");
+        ok($("#testMillisSettings7").html().match(/milliseconds ago/), "Settings correctly applied");
       });
 
       test("minutes", function () {
@@ -667,6 +686,28 @@
           $.timeago.settings.allowFuture = origAllowFuture;
           $.timeago.settings.allowPast = origAllowPast;
         }
+      });
+
+      module("RelativeTimeago");
+
+      test("25 hours", function () {
+        ok(($("#testRelativeTimePast").html() === "a day ago"), "Incorrectly parsed");
+      });
+
+      test("0 sec", function () {
+        ok(($("#testRelativeTimeTodayFuture").html().match(/^Today/)), "Incorrectly parsed");
+      });
+
+      test("24 hours", function () {
+        ok(($("#testRelativeTimeTomorrowFuture").html().match(/^Tomorrow/)), "Incorrectly parsed");
+      });
+
+      test("120 hours", function () {
+        ok(($("#testRelativeTimeInFiveDaysFuture").html().match(/^Next/)), "Incorrectly parsed");
+      });
+
+      test("240 hours", function () {
+        ok(($("#testRelativeTimeInTenDaysFuture").html().match(/[0-9]. at [0-9]./)), "Incorrectly parsed");
       });
 
       module("Disposal");

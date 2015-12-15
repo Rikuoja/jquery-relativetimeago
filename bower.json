@@ -1,5 +1,5 @@
 {
-  "name": "jquery-timeago",
+  "name": "jquery-relativetimeago",
   "license": "MIT",
   "main": "jquery.timeago.js",
   "ignore": [
@@ -7,6 +7,7 @@
     "vendor"
   ],
   "dependencies": {
-    "jquery": ">=1.4"
+    "jquery": ">=1.4",
+    "moment": ">=2.0"
   }
 }

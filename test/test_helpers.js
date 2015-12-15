@@ -143,6 +143,14 @@ function unloadDoNotAllowFuture() {
   disableMockedDate();
 }
 
+function loadRelativeTime() {
+  $.timeago.settings.relativeTime = true;
+}
+
+function unloadRelativeTime() {
+  $.timeago.settings.relativeTime = false;
+}
+
 function loadDoNotAllowPast() {
   var mockDateToUse = "2010-01-01";
   $.timeago.settings.allowFuture = true;

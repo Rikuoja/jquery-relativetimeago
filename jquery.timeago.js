@@ -1,10 +1,11 @@
 /**
  * Timeago is a jQuery plugin that makes it easy to support automatically
  * updating fuzzy timestamps (e.g. "4 minutes ago" or "about 1 day ago").
+ * Relative Timeago formats future times in calendar terms.
  *
- * @name timeago
+ * @name relative-timeago
  * @version 1.4.3
- * @requires jQuery v1.2.3+
+ * @requires jQuery v1.2.3+ and Moment.js v2.0.0+
  * @author Ryan McGeary
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  *
@@ -44,6 +45,7 @@
       allowPast: true,
       allowFuture: false,
       localeTitle: false,
+      relativeTime: false,
       cutoff: 0,
       autoDispose: true,
       strings: {
@@ -212,6 +214,30 @@
   }
 
   function inWords(date) {
+    var milliseconds = distance(date);
+    // past dates will be rendered as usual
+    if ($t.settings.relativeTime && milliseconds <= 0) {
+      now = new Date();
+      if (milliseconds > -1000*60*60*24*7) {
+        if (date.getDate() == now.getDate()) {
+          return "Today at " + date.getHours() + ":" + date.getMinutes();
+        }
+        if (date.getDate() == now.getDate()+1) {
+          return "Tomorrow at " + date.getHours() + ":" + date.getMinutes();
+        }
+        var weekday = new Array(7);
+        weekday[0]=  "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+         return "Next " + weekday[date.getDay()] + " at " + date.getHours() + ":" + date.getMinutes();
+      }
+      // dates more than a week in the future
+      return moment(date).format('dddd MMMM D [at] hh:mm');
+    }
     return $t.inWords(distance(date));
   }
 
