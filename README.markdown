@@ -71,7 +71,7 @@ To enable calendar formatting of future dates, use
 
 ```html
 <script type="text/javascript">
-   $t.settings.relativeTime = True;
+   $.timeago.settings.relativeTime = True;
    jQuery(document).ready(function() {
      $("abbr.timeago").timeago();
    });
