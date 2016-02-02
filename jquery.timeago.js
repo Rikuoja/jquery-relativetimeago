@@ -220,10 +220,10 @@
       now = new Date();
       if (milliseconds > -1000*60*60*24*7) {
         if (date.getDate() == now.getDate()) {
-          return "Today at " + date.getHours() + ":" + date.getMinutes();
+          return "Today at " + moment(date).format('HH:mm');
         }
         if (date.getDate() == now.getDate()+1) {
-          return "Tomorrow at " + date.getHours() + ":" + date.getMinutes();
+          return "Tomorrow at " + moment(date).format('HH:mm');
         }
         var weekday = new Array(7);
         weekday[0]=  "Sunday";
@@ -233,10 +233,10 @@
         weekday[4] = "Thursday";
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
-         return "Next " + weekday[date.getDay()] + " at " + date.getHours() + ":" + date.getMinutes();
+         return "Next " + weekday[date.getDay()] + " at " + moment(date).format('HH:mm');
       }
       // dates more than a week in the future
-      return moment(date).format('dddd MMMM D [at] hh:mm');
+      return moment(date).format('dddd MMMM D [at] HH:mm');
     }
     return $t.inWords(distance(date));
   }
