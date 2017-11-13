@@ -1,0 +1,22 @@
+{
+  "name": "jquery-relativetimeago",
+  "version": "1.0.0",
+  "description": "Timeago is a jQuery plugin that makes it easy to support automatically updating fuzzy timestamps (e.g. \"4 minutes ago\" or \"about 1 day ago\") from ISO 8601 formatted dates and times embedded in your HTML (à la microformats). RelativeTimeago fork allows displaying future times in calendar terms (e.g. \"Today at 18:00\", \"Next sunday at 18:00\", \"Sunday December 29 at 18:00\") while not affecting the display of past times.",
+  "main": "jquery.timeago.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rikuoja/jquery-relativetimeago.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rikuoja/jquery-relativetimeago/issues"
+  },
+  "homepage": "https://github.com/Rikuoja/jquery-relativetimeago#readme"
+}
